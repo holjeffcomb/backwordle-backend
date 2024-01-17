@@ -1,3 +1,5 @@
+const words = require("./words");
+
 var createError = require("http-errors");
 const express = require("express");
 const cors = require("cors");
@@ -9,59 +11,6 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
-
-const words = [
-  "strip",
-  "smash",
-  "shock",
-  "linen",
-  "chart",
-  "tough",
-  "white",
-  "wrong",
-  "plane",
-  "taste",
-  "noise",
-  "share",
-  "fault",
-  "cheek",
-  "yearn",
-  "braid",
-  "treat",
-  "judge",
-  "front",
-  "fling",
-  "color",
-  "state",
-  "scene",
-  "harsh",
-  "heavy",
-  "coach",
-  "means",
-  "evoke",
-  "knock",
-  "mouth",
-  "lunch",
-  "hobby",
-  "right",
-  "grass",
-  "torch",
-  "glide",
-  "visit",
-  "movie",
-  "clean",
-  "throw",
-  "light",
-  "twist",
-  "stall",
-  "creed",
-  "glass",
-  "grace",
-  "cruel",
-  "witch",
-  "liver",
-  "night",
-];
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
