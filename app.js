@@ -1,4 +1,5 @@
 const words = require("./words");
+const checkWords = require("./checkWords");
 
 var createError = require("http-errors");
 const express = require("express");
@@ -29,6 +30,12 @@ app.use("/users", usersRouter);
 app.get("/word", (req, res) => {
   const randomWord = words[Math.floor(Math.random() * words.length)];
   res.send({ word: randomWord });
+});
+
+app.get("/check-word/:word", (req, res) => {
+  const wordToCheck = req.params.word;
+  const isAWord = checkWords.includes(wordToCheck.toLowerCase());
+  res.send(isAWord);
 });
 
 // catch 404 and forward to error handler
