@@ -1,5 +1,6 @@
 const words = require("./words");
 const checkWords = require("./checkWords");
+const cron = require("node-cron");
 
 var createError = require("http-errors");
 const express = require("express");
@@ -12,6 +13,14 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
+
+let wordOfTheDay = "slice";
+
+cron.schedule("0 0 * * *", () => {
+  const randomIndex = Math.floor(Math.random() * words.length);
+  wordOfTheDay = words[randomIndex];
+  console.log(`Selected word of the day: ${wordOfTheDay}`);
+});
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -28,8 +37,14 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 app.get("/word", (req, res) => {
-  const randomWord = words[Math.floor(Math.random() * words.length)];
-  res.send({ word: randomWord });
+  res.send({ word: wordOfTheDay });
+});
+
+app.get("/new-word", (req, res) => {
+  const randomIndex = Math.floor(Math.random() * words.length);
+  wordOfTheDay = words[randomIndex];
+  console.log(`Selected word of the day: ${wordOfTheDay}`);
+  res.send(wordOfTheDay);
 });
 
 app.get("/check-word/:word", (req, res) => {
